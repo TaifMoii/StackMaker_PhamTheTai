@@ -38,6 +38,11 @@ public class LevelManager : Singleton<LevelManager>
     }
     public void OnFinish()
     {
+        StartCoroutine(WinCoroutine());
+    }
+    IEnumerator WinCoroutine()
+    {
+        yield return new WaitForSeconds(3f);
         UIManager.Instance.OpenFinishUI();
         GameManager.Instance.ChangeState(GameState.GameOver);
         MoveToChest();
@@ -52,4 +57,6 @@ public class LevelManager : Singleton<LevelManager>
     {
         Vector3.MoveTowards(player.transform.position, currentLevel.finishPoint.position, 0.5f);
     }
+
+
 }
